@@ -5,6 +5,9 @@
     Coding  :   UTF-8
     Ver     :   V1.0
 */
+//本项目开源地址 https://github.com/mhw666/15PB-Snake 本文件开源地址：
+//https://github.com/mhw666/15PB-Snake/blob/master/15PB-Snake/15PB-Snake.cpp
+
 
 #include <iostream>
 
