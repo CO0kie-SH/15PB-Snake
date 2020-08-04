@@ -28,7 +28,11 @@ using namespace std;
 const char apple[][3] = {"　" ,"◆","◇","①","②","③" };
 static char map[MAP_H][MAP_W] = { 0 };
 
-
+typedef struct _SNKBODY {
+    unsigned short x;
+    unsigned short y;
+    struct _SNKBODY* NEXT;
+}SNKBODY;
 
 class CSnake
 {
@@ -39,6 +43,7 @@ public:
 private:
     unsigned short x;
     unsigned short y;
+    SNKBODY body;
 };
 
 CSnake::CSnake()
@@ -68,21 +73,14 @@ void MAPprint()
 int main()
 {
     std::cout << "Hello World!\n";
-    std::cout << "※\n";
-    std::cout << "※\n";
-    std::cout << "※※※\n";
     int key=0;
-    map[1][10] = 'A';
-    map[1][11] = 'B';
     MAPprint();
     while (key!=27)
     {
         key = _getch();
         switch (key)
         {
-        case KLeft:
-        case 65:
-        case 97:
+        case KLeft:case 65:case 97:
             //std::cout << "左\n";
             map[1][10] = 'B';
             map[1][9] = 'A';
