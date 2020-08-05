@@ -25,7 +25,7 @@
 #define SBody 'B'
 using namespace std;
 
-const char apple[][3] = {"　" ,"◆","◇","①","②","③" };
+const char apple[][3] = {"※","　" ,"◆","◇","①","②","③" };
 static char map[MAP_H][MAP_W] = { 0 };
 
 typedef struct _SNKBODY {
@@ -43,37 +43,46 @@ public:
 private:
     unsigned short x;
     unsigned short y;
-    SNKBODY body;
+    SNKBODY* body;
 };
 
 CSnake::CSnake()
 {
+    this->x = 2;
+    this->y = 0;
+    this->body = new SNKBODY;
+    this->body->NEXT = nullptr;
 }
 
 CSnake::~CSnake()
 {
+    delete body;
 }
 
 
 void MAPprint()
 {
+    cout << apple[0]<<endl;
     for (unsigned short i = 0, tmp = 0; i < MAP_H; i++)
     {
+        cout << apple[0];
         for (unsigned short j = 0; j < MAP_W; j++)
         {
             switch (map[i][j]){
-            case SHead: tmp = 1; break;
-            case SBody: tmp = 2; break;
-            default:    tmp = 0; break;}
+            case SHead: tmp = 2; break;
+            case SBody: tmp = 3; break;
+            default:    tmp = 1; break;}
             cout << apple[tmp];
-        }   cout << endl;
+        }   cout << apple[0] << endl;
     }
+    cout << apple[0] << endl;
 }
 
 int main()
 {
     std::cout << "Hello World!\n";
     int key=0;
+    CSnake cSnke;
     MAPprint();
     while (key!=27)
     {
