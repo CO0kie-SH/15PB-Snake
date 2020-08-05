@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <windows.h>
 using namespace std;
 
 
@@ -28,3 +29,4 @@ typedef struct _SNKBODY {
 
 
 void MAPprint();
+bool InitView();

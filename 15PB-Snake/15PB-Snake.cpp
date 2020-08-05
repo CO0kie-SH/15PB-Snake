@@ -8,7 +8,6 @@
 //本项目开源地址 https://github.com/mhw666/15PB-Snake 本文件开源地址：
 //https://github.com/mhw666/15PB-Snake/blob/master/15PB-Snake/15PB-Snake.cpp
 
-#include <windows.h>
 #include <conio.h>
 #include "CSnake.h"
 #pragma comment(lib,"winmm.lib")
