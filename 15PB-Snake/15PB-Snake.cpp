@@ -95,9 +95,6 @@ void CSnake::CRefresh(char cOrientation,bool IsPrint)
         cout << "撞墙啦！" << endl;
         return;
     }
-    switch (this->orientation) {
-    default:break;
-    }
     SNKBODY* tmp = this->body;                  //初始化链表循环
     while (tmp->NEXT != nullptr) {              //循环链表，将地图清空
         tmp = tmp->NEXT;                        //跳过链表头并循环
