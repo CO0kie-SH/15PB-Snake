@@ -141,6 +141,12 @@
   <ItemGroup>
     <ClCompile Include="15PB-Snake.cpp" />
     <ClCompile Include="CSnake.cpp" />
+    <ClCompile Include="MyView.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CSnake.h" />
+    <ClInclude Include="MyView.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
