@@ -13,8 +13,8 @@
 #pragma comment(lib,"winmm.lib")
 int main()
 {
-    std::cout << "Hello World!\n";
-    PlaySoundA("bg.wav", NULL, SND_ASYNC | SND_NODEFAULT);
+    //PlaySoundA("bg.wav", NULL, SND_ASYNC | SND_NODEFAULT);
+    InitView();
     int key=0;
     CSnake cSnke;
     MAPprint();
@@ -32,9 +32,12 @@ int main()
             cSnke.Refresh('S', true); break;
         case KUp:
             cSnke.Refresh('W', true); break;
+        case 59:
+            SetXY(10, 10, "我");
+            break;
         case 224:break;
         default:
-            std::cout << "键码\t"<<key << std::endl;
+            //std::cout << "键码\t"<<key << std::endl;
             break;
         }
     }

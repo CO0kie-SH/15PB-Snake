@@ -15,7 +15,7 @@ private:
     unsigned short y;
     unsigned char orientation;
     unsigned char buff[50];
-    unsigned int bodylen;
+    unsigned short bodylen;
     SNKBODY* body;
     SNKBODY* bodyEND;
 

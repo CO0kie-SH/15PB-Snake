@@ -69,18 +69,18 @@ void CSnake::Refresh(unsigned char cOrientation, bool IsPrint)
     SNKBODY* tmp = this->body;                  //初始化链表循环
     while (tmp->NEXT != nullptr) {              //循环链表，将地图清空
         tmp = tmp->NEXT;                        //跳过链表头并循环
-        map[tmp->y][tmp->x] = '0';              //将地图数组赋值0
+        map[tmp->y][tmp->x] = '\0';             //将地图数组赋值0
         if (tmp->i == this->bodylen - 1)
             this->bodyEND = tmp;                //并且将尾赋值给END
     }
-    if (map[y2][x2] != '1') {
+    if (GetMAP(x2, y2)!= MAPSHead) {
         tmp->x = this->x; tmp->y = this->y;     //将蛇尾移动至蛇头
         tmp->NEXT = this->body->NEXT;           //重定义蛇体
         this->body->NEXT = tmp;                 //重定义链表
         this->bodyEND->NEXT = nullptr;          //重定义链表尾
     }
     this->x = x2; this->y = y2;                 //将判断过后的坐标赋给蛇头
-    map[this->y][this->x] = MAPSHead;           //画蛇头
+    SetMAP(this->x, this->y, MAPSHead);         //画蛇头
     tmp = this->body; this->bodylen = 0;        //初始化链表
     while (tmp->NEXT != nullptr) {              //循环链表，将地图赋值
         tmp = tmp->NEXT;
@@ -113,7 +113,10 @@ void CSnake::GameOver(unsigned char cOrientatio)
     switch (cOrientatio)
     {
     case GAMEWALL:
-        cout << INFOGames[GAMEWALL - 'a'] << endl; break;
+        system("color 4f");
+        /*SetXY(1, 1, FOODSERR);
+        SetXY(MAP_W / 2 - 6, MAP_H / 2, GAMEOVER);*/
+        //cout << INFOGames[GAMEWALL - 'a'] << endl; break;
     default:
         break;
     }
