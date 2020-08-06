@@ -12,22 +12,23 @@
 #include "CSnake.h"
 #pragma comment(lib,"winmm.lib")
 
-int main()
+int key = 0, lenPass = 3, lenFood1 = 2, i = 0, imenu = 1;
+CSnake* cSnake[] = { nullptr,nullptr };
+
+void GoGame(int people)
 {
-    //PlaySoundA("bg.wav", NULL, SND_ASYNC | SND_NODEFAULT);
-    InitView();
-    int key = 0, SNKLen = 1, lenPass = 3, lenFood1 = 2, i = 0;
-    CSnake* cSnake[] = { nullptr,nullptr };
-    switch (SNKLen) {
+    char go = 'G';
+    memset(map, 0, MAP_H * MAP_W);
+    switch (people) {
     case 2:cSnake[1] = new CSnake(2); cSnake[0] = new CSnake(0); break;
     case 1:cSnake[0] = new CSnake(0); break;
-    default:return 0; break;
+    default:return; break;
     }
     InitMap(简单);
-    while (key!=27)
+    while (_kbhit())
     {
         key = _getch();
-        if (SNKLen == 1 && cSnake[0]->GetAlive()) {
+        if (people == 1 && cSnake[0]->GetAlive()) {
             switch (key)
             {
             case KLeft:case 'A':
@@ -39,7 +40,7 @@ int main()
             case KUp:case 'W':
                 cSnake[0]->Refresh('W', true); break;
             case 59:
-                SetXY((cSnake[0]->GetHeadX() * 2) + 2, cSnake[0]->GetHeadY() + 1, FOODSERR);
+                SetXY(2 + (2 * cSnake[0]->GetHeadX()), 1 + cSnake[0]->GetHeadY(), FOODSERR);
                 break;
             case 224:break;
             default:
@@ -47,14 +48,50 @@ int main()
                 break;
             }
         }
-        else if (SNKLen == 2)
+        else if (people == 2)
         {
-
-        }
-        else {
-            return 0;
+            //增加玩家②
         }
     }
     //结束循环
+    DelMap();
+    switch (people) {
+    case 2: delete cSnake[1];
+    case 1: delete cSnake[0]; break;
+    default:return; break;
+    }
+}
+
+int main()
+{
+    PlaySoundA("bg.wav", NULL, SND_ASYNC | SND_NODEFAULT);
+    InitView();
+    while (imenu != -1)
+    {
+        key = _getch();
+        switch (key)
+        {
+        case KUp:
+            if (imenu > 1) {
+                MENUprint(--imenu);
+            }
+            break;
+        case KDown:
+            if (imenu < 5) {
+                MENUprint(++imenu);
+            }break;
+        case 13:
+            if (imenu == 退出) imenu = -1;
+            else if (imenu == 单人游戏) GoGame(单人游戏);
+            else if (imenu == 双人游戏-1) GoGame(双人游戏);
+            else {
+                printf("\n\n%20s%s\n%20s", " ", "功能未制作，请联系管理员", " ");
+                system("pause");
+            }
+            MENUprint(imenu);
+            break;
+        default: continue; break;
+        }
+    }
     return 0;
 }

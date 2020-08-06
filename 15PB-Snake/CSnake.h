@@ -1,7 +1,6 @@
 #pragma once
 #include "MyView.h"
 
-
 class CSnake
 {
 public:
@@ -17,10 +16,11 @@ public:
     //设置蛇的方向
     bool SetOrientation(unsigned char cOrientatio);
 private:
-    unsigned short x, y, x2, y2;
-    unsigned char orientation;
-    unsigned char buff[50];
+    unsigned short x, y;
     unsigned short bodylen;
+    unsigned short addlen;
+    unsigned char orientation;
+    unsigned int score;
     char alive;
     SNKBODY* body;
     SNKBODY* bodyEND;
