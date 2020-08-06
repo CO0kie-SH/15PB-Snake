@@ -25,5 +25,5 @@ private:
     SNKBODY* body;
     SNKBODY* bodyEND;
 
-    void GameOver(unsigned char cOrientatio);
+    void GameOver(unsigned char cOrientation);
 };

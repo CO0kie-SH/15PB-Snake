@@ -41,11 +41,12 @@ typedef unsigned char ubool;
 
 //定义地图中的内容
 const char INFOFoods[][3] = { "空","※","　" ,"◆","◇","①","②","③" ,"×","㊣"};
-const char INFOGames[][25] = { "你已经撞墙了！游戏结束！" };
+const char INFOGames[][42] = { "你已经撞墙了！游戏结束！按ESC返回上一层！" };
 
 //定义全局map、OutPut句柄
 extern char map[MAP_H][MAP_W];
 extern HANDLE gOUTPUT;
+extern CFood* gCFood[10];
 
 //定义蛇身结构体
 typedef struct _SNKBODY {

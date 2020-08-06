@@ -24,7 +24,7 @@ int main()
     case 1:cSnake[0] = new CSnake(0); break;
     default:return 0; break;
     }
-    InitMap(cFood[5],);
+    InitMap();
     while (key!=27)
     {
         key = _getch();

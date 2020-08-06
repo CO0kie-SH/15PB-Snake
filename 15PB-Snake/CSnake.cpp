@@ -107,16 +107,16 @@ bool CSnake::SetOrientation(unsigned char cOrientatio)
 
 
 
-void CSnake::GameOver(unsigned char cOrientatio)
+void CSnake::GameOver(unsigned char cOrientation)
 {
-    switch (cOrientatio)
+    switch (cOrientation)
     {
     case GAMEWALL:
         system("color 4f");
-        SetXY((2 * this->x2) + 2, this->y2 + 1, FOODSERR);
+        SetXY(2 + (2 * this->x2), 1 + this->y2, FOODSERR);
         this->orientation = GAMEWALL;
         this->alive = '\0';
-        SetXY((2 * this->x2) + 2, this->y2 + 2, INFOGames[OVERWALL]);
+        SetXY(0, MAP_W-1, INFOGames[OVERWALL]);
     default:
         break;
     }

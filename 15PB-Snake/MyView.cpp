@@ -54,7 +54,7 @@ ubool InitMap()
     MAPprint();
     return true;
 }
-ubool SetXY(SHORT x, SHORT y,char index)	//自定义 gotoxy 函数
+ubool SetXY(SHORT x, SHORT y,char index)
 {
     if (index != '\0') {
         COORD xy = { xy.X = x,xy.Y = y };
