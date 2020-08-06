@@ -2,7 +2,7 @@
 
 CSnake::CSnake(unsigned short y)
 {
-    cout << "实例化CSnake" << endl;
+    cout << "实例化CSnake：" << y << endl;
     this->alive = 'A';
     this->x = 2;
     this->y = y;

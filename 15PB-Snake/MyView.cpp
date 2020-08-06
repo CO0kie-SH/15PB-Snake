@@ -2,6 +2,7 @@
 
 char map[MAP_H][MAP_W];
 HANDLE gOUTPUT;
+CFood* gCFood[APPLE_NUM];
 
 void MAPprint()
 {
@@ -48,11 +49,37 @@ ubool InitView()
     return (ubool)SetConsoleCursorInfo(gOUTPUT, &cursor);
     //return true;
 }
-ubool InitMap()
-{
 
+void DelView()
+{
+}
+
+
+ubool InitMap(int difficu)
+{
+    memset(map, 0, MAP_H * MAP_W);              //÷ÿ÷√µÿÕºMAP
+    unsigned short n = INFODifficu[difficu][0] - '0', i = 0;
+    for (; i < n; i++)
+    {
+        gCFood[i] = new CFood(MAPPASS);
+    }
+    n += (INFODifficu[difficu][1] - '0');
+    for (; i < n; i++)
+    {
+        gCFood[i] = new CFood(MAPFOOD1);
+    }
     MAPprint();
     return true;
+}
+void DelMap()
+{
+    for (unsigned char i = 0; i < APPLE_NUM; i++)
+    {
+        if (gCFood != nullptr) {
+            delete gCFood[i];
+            gCFood[i] = nullptr;
+        }
+    }
 }
 ubool SetXY(SHORT x, SHORT y,char index)
 {
@@ -95,4 +122,10 @@ unsigned char GetMAP(SHORT x, SHORT y)
         return map[y][x];
     }
     return '\0';
+}
+
+COORD GetRandomByMap()
+{
+    COORD xy = { xy.X = 0,xy.Y = 0 };
+    return xy;
 }

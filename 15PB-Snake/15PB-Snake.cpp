@@ -16,15 +16,14 @@ int main()
 {
     //PlaySoundA("bg.wav", NULL, SND_ASYNC | SND_NODEFAULT);
     InitView();
-    int key = 0, SNKLen = 1, lenPass = 3, lenFood1 = 2;
+    int key = 0, SNKLen = 1, lenPass = 3, lenFood1 = 2, i = 0;
     CSnake* cSnake[] = { nullptr,nullptr };
-    CFood* cFood[5] = { nullptr };
     switch (SNKLen) {
     case 2:cSnake[1] = new CSnake(2); cSnake[0] = new CSnake(0); break;
     case 1:cSnake[0] = new CSnake(0); break;
     default:return 0; break;
     }
-    InitMap();
+    InitMap(简单);
     while (key!=27)
     {
         key = _getch();
@@ -48,10 +47,14 @@ int main()
                 break;
             }
         }
-    }
-    //结束循环，开始释放资源
-    for (int i = 0; i < 5; i++)
-    {
+        else if (SNKLen == 2)
+        {
 
+        }
+        else {
+            return 0;
+        }
     }
+    //结束循环
+    return 0;
 }

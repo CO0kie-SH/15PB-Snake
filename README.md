@@ -10,3 +10,6 @@ https://www.cnblogs.com/seafever/p/12345200.html
 https://blog.csdn.net/oHanTanYanYing/article/details/72179593
 <br>
 https://www.cnblogs.com/zmjarek/p/4228399.html
+
+C++ STL标准随机数 参考<br>
+https://www.cnblogs.com/byhj/p/4149467.html
