@@ -11,34 +11,47 @@
 #include <conio.h>
 #include "CSnake.h"
 #pragma comment(lib,"winmm.lib")
+
 int main()
 {
     //PlaySoundA("bg.wav", NULL, SND_ASYNC | SND_NODEFAULT);
     InitView();
-    int key=0;
-    CSnake cSnke;
-    MAPprint();
-    
+    int key = 0, SNKLen = 1, lenPass = 3, lenFood1 = 2;
+    CSnake* cSnake[] = { nullptr,nullptr };
+    CFood* cFood[5] = { nullptr };
+    switch (SNKLen) {
+    case 2:cSnake[1] = new CSnake(2); cSnake[0] = new CSnake(0); break;
+    case 1:cSnake[0] = new CSnake(0); break;
+    default:return 0; break;
+    }
+    InitMap(cFood[5],);
     while (key!=27)
     {
         key = _getch();
-        switch (key)
-        {
-        case KLeft:case 65:case 97:
-            cSnke.Refresh('A', true); break;
-        case KRight:
-            cSnke.Refresh('D', true); break;
-        case KDown:
-            cSnke.Refresh('S', true); break;
-        case KUp:
-            cSnke.Refresh('W', true); break;
-        case 59:
-            SetXY(10, 10, "我");
-            break;
-        case 224:break;
-        default:
-            //std::cout << "键码\t"<<key << std::endl;
-            break;
+        if (SNKLen == 1 && cSnake[0]->GetAlive()) {
+            switch (key)
+            {
+            case KLeft:case 'A':
+                cSnake[0]->Refresh('A', true); break;
+            case KRight:case 'D':
+                cSnake[0]->Refresh('D', true); break;
+            case KDown:case 'S':
+                cSnake[0]->Refresh('S', true); break;
+            case KUp:case 'W':
+                cSnake[0]->Refresh('W', true); break;
+            case 59:
+                SetXY((cSnake[0]->GetHeadX() * 2) + 2, cSnake[0]->GetHeadY() + 1, FOODSERR);
+                break;
+            case 224:break;
+            default:
+                //std::cout << "键码\t"<<key << std::endl;
+                break;
+            }
         }
+    }
+    //结束循环，开始释放资源
+    for (int i = 0; i < 5; i++)
+    {
+
     }
 }

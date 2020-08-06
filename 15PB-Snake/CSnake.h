@@ -5,17 +5,23 @@
 class CSnake
 {
 public:
-    CSnake();
+    CSnake(unsigned short y = 0);
     ~CSnake();
+    //获取蛇头的XY
+    unsigned short GetHeadX() { return this->x; };
+    unsigned short GetHeadY() { return this->y; };
+    char GetAlive() { return this->alive; };
+
+    //功能区-》移动蛇
     void Refresh(unsigned char cOrientatio = '\0', bool IsPrint = false);
+    //设置蛇的方向
     bool SetOrientation(unsigned char cOrientatio);
-    
 private:
-    unsigned short x;
-    unsigned short y;
+    unsigned short x, y, x2, y2;
     unsigned char orientation;
     unsigned char buff[50];
     unsigned short bodylen;
+    char alive;
     SNKBODY* body;
     SNKBODY* bodyEND;
 

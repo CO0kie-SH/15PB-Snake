@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <windows.h>
+#include "CFood.h"
 using namespace std;
 
 typedef unsigned short ushort;
@@ -18,8 +19,12 @@ typedef unsigned char ubool;
 #define KDown 80
 
 //定义地图索引
-#define MAPSHead 'A'
+#define MAPSHead 'H'
 #define MAPSBody 'B'
+#define MAPPASS  'P'
+#define MAPFOOD1 '1'
+#define MAPFOOD2 '2'
+#define MAPFOOD3 '3'
 
 //定义果实索引
 #define FOODSWALL 1
@@ -27,16 +32,22 @@ typedef unsigned char ubool;
 #define FOODSHEAD 3
 #define FOODSBODY 4
 #define FOODSERR  8
+#define FOODSPASS 9
 
 //定义游戏状态
 #define GAMEWALL 'a'
 #define GAMEOVER "游戏结束"
+#define OVERWALL 0
 
-const char INFOFoods[][3] = { "空","※","　" ,"◆","◇","①","②","③" ,"×"};
-const char INFOGames[][20] = { "你已经撞墙了！" };
+//定义地图中的内容
+const char INFOFoods[][3] = { "空","※","　" ,"◆","◇","①","②","③" ,"×","㊣"};
+const char INFOGames[][25] = { "你已经撞墙了！游戏结束！" };
+
+//定义全局map、OutPut句柄
 extern char map[MAP_H][MAP_W];
 extern HANDLE gOUTPUT;
 
+//定义蛇身结构体
 typedef struct _SNKBODY {
     unsigned int i;
     unsigned short x;
@@ -44,9 +55,12 @@ typedef struct _SNKBODY {
     struct _SNKBODY* NEXT;
 }SNKBODY;
 
-
+//定义地图打印函数
 void MAPprint();
+
+//定义初始化程序视图
 ubool InitView();
+ubool InitMap();
 ubool SetXY(SHORT x, SHORT y, char index = '\0');
 ubool SetXY(SHORT x, SHORT y, const char* buff = nullptr);
 ubool SetMAP(SHORT x, SHORT y, char index = '\0');

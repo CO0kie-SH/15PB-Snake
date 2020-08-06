@@ -1,5 +1,4 @@
 #include "MyView.h"
-#include <cstdio>
 
 char map[MAP_H][MAP_W];
 HANDLE gOUTPUT;
@@ -45,15 +44,23 @@ ubool InitView()
 {
     gOUTPUT = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO cursor = { 1,false };
+
     return (ubool)SetConsoleCursorInfo(gOUTPUT, &cursor);
     //return true;
+}
+ubool InitMap()
+{
+
+    MAPprint();
+    return true;
 }
 ubool SetXY(SHORT x, SHORT y,char index)	//自定义 gotoxy 函数
 {
     if (index != '\0') {
         COORD xy = { xy.X = x,xy.Y = y };
         SetConsoleCursorPosition(gOUTPUT, xy);
-        cout << INFOFoods[index] << flush;
+        cout << INFOFoods[index] << ends;
+        return true;
     }
     return false;
 }
@@ -61,9 +68,10 @@ ubool SetXY(SHORT x, SHORT y,char index)	//自定义 gotoxy 函数
 ubool SetXY(SHORT x, SHORT y, const char* buff)
 {
     if (buff != nullptr) {
-        COORD xy = { xy.X = 10,xy.Y = 10 };
+        COORD xy = { xy.X = x,xy.Y = y };
         SetConsoleCursorPosition(gOUTPUT, xy);
-        printf(buff);
+        cout << buff << ends;
+        return true;
     }
     return false;
 }
@@ -74,6 +82,7 @@ ubool SetMAP(SHORT x, SHORT y, char index)
         x <= MAP_W && y <= MAP_H)
     {
         map[y][x] = index;
+        return true;
     }
     return false;
 }

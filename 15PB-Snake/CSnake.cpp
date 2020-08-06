@@ -1,23 +1,24 @@
 #include "CSnake.h"
 
-CSnake::CSnake()
+CSnake::CSnake(unsigned short y)
 {
     cout << "实例化CSnake" << endl;
+    this->alive = 'A';
     this->x = 2;
-    this->y = 0;
+    this->y = y;
     this->bodylen = 2;
     this->orientation = 'D';
     this->body = new SNKBODY;
     SNKBODY* tmp = new SNKBODY;
     tmp->NEXT = nullptr;
     tmp->x = 1;
-    tmp->y = 0;
+    tmp->y = y;
     tmp->i = 1;
     this->body->NEXT = tmp;
     tmp = new SNKBODY;
     tmp->NEXT = nullptr;
     tmp->x = 0;
-    tmp->y = 0;
+    tmp->y = y;
     tmp->i = 2;
     this->body->NEXT->NEXT = tmp;
     this->Refresh();
@@ -30,25 +31,21 @@ CSnake::~CSnake()
 
 void CSnake::Refresh(unsigned char cOrientation, bool IsPrint)
 {
-    if (this->orientation > 'Z') {              //判断蛇的状态
-        cout << INFOGames[this->orientation - 'a'] << endl;
-        return;
-    }
+    if (!this->alive) return;                   //如果死亡则返回
     if (cOrientation != '\0') {                 //如果非默认值，则调用Set
         if (this->SetOrientation(cOrientation)) //如果是反方向，则返回
             return;
     }
     //—————————分割线—————————//开始判断移动后的数据
-    int x2, y2;                                 //申请移动后的坐标
     switch (this->orientation) {                //判断蛇方向
     case 'W':
         if (this->y == 0) {                     //如果当前为上边界，则撞墙
-            this->GameOver(GAMEWALL);
+            this->GameOver(GAMEWALL); break;
         }
         x2 = this->x; y2 = this->y - 1; break;  //向↑移动>>>y-1
     case 'A':
         if (this->x == 0) {                     //如果当前为左边界，则撞墙
-            this->GameOver(GAMEWALL);
+            this->GameOver(GAMEWALL); break;
         }
         x2 = this->x - 1; y2 = this->y; break;  //向←移动>>>x-1
     case 'S':
@@ -71,7 +68,7 @@ void CSnake::Refresh(unsigned char cOrientation, bool IsPrint)
         tmp = tmp->NEXT;                        //跳过链表头并循环
         map[tmp->y][tmp->x] = '\0';             //将地图数组赋值0
         if (tmp->i == this->bodylen - 1)
-            this->bodyEND = tmp;                //并且将尾赋值给END
+            this->bodyEND = tmp;                //并且将蛇尾赋值给END
     }
     if (GetMAP(x2, y2)!= MAPSHead) {
         tmp->x = this->x; tmp->y = this->y;     //将蛇尾移动至蛇头
@@ -108,15 +105,18 @@ bool CSnake::SetOrientation(unsigned char cOrientatio)
     return is;
 }
 
+
+
 void CSnake::GameOver(unsigned char cOrientatio)
 {
     switch (cOrientatio)
     {
     case GAMEWALL:
         system("color 4f");
-        /*SetXY(1, 1, FOODSERR);
-        SetXY(MAP_W / 2 - 6, MAP_H / 2, GAMEOVER);*/
-        //cout << INFOGames[GAMEWALL - 'a'] << endl; break;
+        SetXY((2 * this->x2) + 2, this->y2 + 1, FOODSERR);
+        this->orientation = GAMEWALL;
+        this->alive = '\0';
+        SetXY((2 * this->x2) + 2, this->y2 + 2, INFOGames[OVERWALL]);
     default:
         break;
     }
