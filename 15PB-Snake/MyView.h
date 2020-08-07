@@ -59,10 +59,15 @@ const char INFOMenu[][29] = {
     {"③读取游戏"},
     {"④编辑地图"},
     {"⑤ 退 出"}
-};const char INFOMenu2[][29] = {
-    {"①简单"},
-    {"②普通"},
-    {"③困难"},
+};const char INFOMenu2[][27] = {
+    {"请选择难度，F1可返回上一层"},
+    {"\t①简单"},
+    {"\t②普通"},
+    {"\t③困难"},
+    {"游戏介绍："},
+    {"\t回车键进入游戏"},
+    {"\t进入游戏按ESC可暂停"},
+    {"\t进入游戏按[空格]可加速"}
 };
 const char INFODifficu[][5] = { {'5','1','2','2'},{'5','2','2','1'},{'7','2','1','0'} };
 
@@ -89,6 +94,7 @@ typedef struct _SNKBODY {
 void MAPprint(DWORD time = 10);
 //打印菜单
 void MENUprint(int index);
+void MENUprint2(int index);
 
 //定义初始化程序视图
 BOOL InitView();

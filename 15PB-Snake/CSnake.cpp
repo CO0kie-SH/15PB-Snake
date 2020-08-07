@@ -148,7 +148,7 @@ void CSnake::GameOver(unsigned char cOrientation)
     default:
         break;
     }
-    SetXY(MAP_W * 2 + 6, MAP_H, INFOGames[index]);
+    SetXY(MAP_W * 2 + 6, MAP_H-1, INFOGames[index]);
     SetXY(MAP_W * 2 + 6, MAP_H + 1, "按ESC返回上一层！");
     system("color 4f");
 }

@@ -18,14 +18,40 @@ DWORD time = 10;
 
 void GoGame(int people)
 {
-    char go = 'G';
+    char go = 'A';
     memset(map, 0, MAP_H * MAP_W);
     switch (people) {
     case 2:cSnake[1] = new CSnake(2); cSnake[0] = new CSnake(0); break;
     case 1:cSnake[0] = new CSnake(0); break;
     default:return; break;
     }
-    InitMap(简单);
+    i = 0; MENUprint2(1);
+    while (go != 'G')
+    {
+        key = _getch();
+        if (key == 13)         //回车
+        {
+            InitMap(i);
+            go = 'G';
+        }
+        else if (key==KUp)
+        {
+            if (i > 0) i--;
+        }
+        else if (key==KDown)
+        {
+            if (i < 2) i++;
+        }
+        else if (key == 59 || key == 27)
+        {
+            go = 'X';
+            break;
+        }
+        else {
+            continue;
+        }
+        if (key) MENUprint2(i+1);
+    }
     while (go != 'X')
     {
         Sleep(1);

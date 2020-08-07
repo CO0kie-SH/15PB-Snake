@@ -72,6 +72,16 @@ void MENUprint(int index)
         SetXY(20, i + 5, INFOMenu[i],color);
     }
 }
+void MENUprint2(int index)
+{
+    system("cls");
+    WORD color= NULL;
+    for (int i = 0; i < 8; i++)
+    {
+        color = index == i ? 0x1f : 0x0f;
+        SetXY(20, i + 5, INFOMenu2[i],color);
+    }
+}
 
 BOOL InitView()
 {
