@@ -21,7 +21,7 @@ private:
     unsigned short addlen;
     unsigned char orientation;
     unsigned int score;
-    char alive;
+    int alive;
     SNKBODY* body;
     SNKBODY* bodyEND;
 

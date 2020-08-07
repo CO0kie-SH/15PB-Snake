@@ -59,6 +59,10 @@ const char INFOMenu[][29] = {
     {"③读取游戏"},
     {"④编辑地图"},
     {"⑤ 退 出"}
+};const char INFOMenu2[][29] = {
+    {"①简单"},
+    {"②普通"},
+    {"③困难"},
 };
 const char INFODifficu[][5] = { {'5','1','2','2'},{'5','2','2','1'},{'7','2','1','0'} };
 
@@ -82,7 +86,7 @@ typedef struct _SNKBODY {
 }SNKBODY;
 
 //定义地图打印函数
-void MAPprint();
+void MAPprint(DWORD time = 10);
 //打印菜单
 void MENUprint(int index);
 

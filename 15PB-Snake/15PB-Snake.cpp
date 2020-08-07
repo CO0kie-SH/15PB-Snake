@@ -14,6 +14,7 @@
 
 int key = 0, lenPass = 3, lenFood1 = 2, i = 0, imenu = 1;
 CSnake* cSnake[] = { nullptr,nullptr };
+DWORD time = 10;
 
 void GoGame(int people)
 {
@@ -25,22 +26,59 @@ void GoGame(int people)
     default:return; break;
     }
     InitMap(简单);
-    while (_kbhit())
+    while (go != 'X')
     {
-        key = _getch();
-        if (people == 1 && cSnake[0]->GetAlive()) {
+        Sleep(1);
+        if (people == 1) {
+            if (_kbhit()) {
+                key = _getch();
+            }
+            else if (go != 'P') {
+                cSnake[0]->Refresh();
+                if (cSnake[0]->GetAlive())
+                {
+                    MAPprint(time);
+                }
+                else {
+                    go = 'E';
+                    SetXY(MAP_W * 2 + 6, MAP_H + 1, "按F1返回上一层！");
+                }
+                continue;
+            }
             switch (key)
             {
             case KLeft:case 'A':
-                cSnake[0]->Refresh('A', true); break;
+                //cSnake[0]->Refresh('A', true); break;
+                cSnake[0]->SetOrientation('A'); break;
             case KRight:case 'D':
-                cSnake[0]->Refresh('D', true); break;
+                //cSnake[0]->Refresh('D', true); break;
+                cSnake[0]->SetOrientation('D'); break;
             case KDown:case 'S':
-                cSnake[0]->Refresh('S', true); break;
+                //cSnake[0]->Refresh('S', true); break;
+                cSnake[0]->SetOrientation('S'); break;
             case KUp:case 'W':
-                cSnake[0]->Refresh('W', true); break;
-            case 59:
-                SetXY(2 + (2 * cSnake[0]->GetHeadX()), 1 + cSnake[0]->GetHeadY(), FOODSERR);
+                //cSnake[0]->Refresh('W', true); break;
+                cSnake[0]->SetOrientation('W'); break;
+            case 27:        //ESC
+                if (go == 'G')
+                {
+                    go = 'P';
+                    SetXY(MAP_W * 2 + 6, MAP_H, "暂停；按F2继续！");
+                    SetXY(MAP_W * 2 + 6, MAP_H + 1, "按F1返回上一层！");
+                    system("color 1f");
+                }
+                break;
+            case 32:        //空格键
+                time = time == 10 ? 1 : 10;
+                break;
+            case 59:        //F1
+                go = 'X';
+                break;
+            case 60:        //F2
+                if (go == 'P') {
+                    go = 'G';
+                    system("color 0f");
+                }
                 break;
             case 224:break;
             default:
@@ -55,6 +93,7 @@ void GoGame(int people)
     }
     //结束循环
     DelMap();
+    time = 10;
     switch (people) {
     case 2: delete cSnake[1];
     case 1: delete cSnake[0]; break;
@@ -64,7 +103,7 @@ void GoGame(int people)
 
 int main()
 {
-    PlaySoundA("bg.wav", NULL, SND_ASYNC | SND_NODEFAULT);
+    //PlaySoundA("bg.wav", NULL, SND_ASYNC | SND_NODEFAULT);
     InitView();
     while (imenu != -1)
     {

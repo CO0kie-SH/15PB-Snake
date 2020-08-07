@@ -12,10 +12,11 @@ unsigned int score[] = { 0,0 };
 DWORD start_time;
 int diff = 0;
 
-void MAPprint()
+void MAPprint(DWORD time)
 {
     system("cls");
     unsigned short i = MAP_W + 2, tmp, j = 0;
+    DWORD end_time, second, lay;
     while (i-- > 0)
         cout << INFOFoods[FOODSWALL];
     cout << " 游戏时长：\n";
@@ -35,7 +36,6 @@ void MAPprint()
             }
             cout << INFOFoods[tmp];
         }
-        DWORD end_time, second;
         switch (i) {                            //侧边栏输出
         case 0:                                 //第0行输出时间
             end_time = GetTickCount() - start_time;
@@ -57,6 +57,9 @@ void MAPprint()
     for (i = MAP_W + 2; i > 0; --i)
         cout << INFOFoods[FOODSWALL];
     cout << endl;
+    lay = ((diff / 10) * 1000) + (99 - (second / 60)) * 10;
+    lay = lay * (time / 10);
+    Sleep(lay + 10);
 }
 
 void MENUprint(int index)
@@ -109,7 +112,6 @@ ubool InitMap(int difficu)
     {
         gCFood[i] = new CFood(MAPFOOD3);            //增加③型食物
     }
-    MAPprint();                                     //刷新一次地图
     return true;
 }
 void DelMap()

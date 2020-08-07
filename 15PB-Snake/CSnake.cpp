@@ -6,7 +6,7 @@ CSnake::CSnake(unsigned short y)
     this->addlen = 0; this->score = 0;
     this->x = 2; this->y = y;
     this->bodyEND = nullptr;
-    this->alive = 'A';
+    this->alive = 1;
     this->bodylen = 2;
     this->orientation = 'D';
     this->body = new SNKBODY;
@@ -18,7 +18,7 @@ CSnake::CSnake(unsigned short y)
     tmp->NEXT = nullptr;
     tmp->x = 0; tmp->y = y; tmp->i = 2;
     this->body->NEXT->NEXT = tmp;
-    this->Refresh();
+    //this->Refresh();
 }
 
 CSnake::~CSnake()
@@ -136,7 +136,7 @@ void CSnake::GameOver(unsigned char cOrientation)
 {
     int index = 0;
     SetXY(2 + (2 * this->x), 1 + this->y, FOODSERR);
-    this->alive = '\0'; this->orientation = cOrientation;
+    this->alive--; this->orientation = cOrientation;
     switch (cOrientation)
     {
     case GAMEWALL:
