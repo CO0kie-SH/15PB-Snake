@@ -129,7 +129,7 @@ void GoGame(int people)
 
 int main()
 {
-    //PlaySoundA("bg.wav", NULL, SND_ASYNC | SND_NODEFAULT);
+    PlaySoundA("bg.wav", NULL, SND_ASYNC | SND_NODEFAULT);
     InitView();
     while (imenu != -1)
     {

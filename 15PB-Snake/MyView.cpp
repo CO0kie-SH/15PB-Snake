@@ -57,7 +57,7 @@ void MAPprint(DWORD time)
     for (i = MAP_W + 2; i > 0; --i)
         cout << INFOFoods[FOODSWALL];
     cout << endl;
-    lay = ((diff / 10) * 1000) + (99 - (second / 60)) * 10;
+    lay = ((diff / 10) * 1000) + (60 - (second / 60)) * 3;
     lay = lay * (time / 10);
     Sleep(lay + 10);
 }
